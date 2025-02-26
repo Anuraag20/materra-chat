@@ -8,6 +8,8 @@ services:
         - "8000:80"
       depends_on:
         - redis
+      volumes:
+        - /app/media:/home/anuraag/projects/assesments/materra-all/materra-django/media
 
     fastapi:
       container_name: fastapi
@@ -23,7 +25,4 @@ services:
       container_name : redis
       ports:
         - "6379:6379"
-        
-
-
 

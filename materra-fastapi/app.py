@@ -8,9 +8,10 @@ import os
 from pydantic import BaseModel
 
 client = OpenAI(
-    api_key=os.getenv('GEMINI_API_KEY'),
-    base_url="https://generativelanguage.googleapis.com/v1beta/openai/"
+    api_key=os.getenv('LLM_API_KEY'),
+    base_url=os.getenv('LLM_BASE_URL')
 )
+
 
 app = FastAPI()
 
@@ -47,10 +48,3 @@ def chat_response(messages):
 @app.post("/")
 async def root(data: list[ChatMessage]):
     return StreamingResponse(chat_response(data))
-
-
-car = {
-        'make': 'Toyota',
-        'model': 'Corolla',
-        'year': 2018
-}

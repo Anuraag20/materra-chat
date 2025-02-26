@@ -14,7 +14,6 @@ RUN pip install --no-cache-dir -r requirements.txt
  
 COPY materra-django/ /app/
  
-EXPOSE 8000
- 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:80"]
+COPY --chmod=0755 compose/django/entrypoint.sh /app/entrypoint.sh
 
+ENTRYPOINT ["/app/entrypoint.sh"]

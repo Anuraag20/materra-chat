@@ -3,7 +3,7 @@ const this_username = $('#username').val()
 const chatList = $('#chats')
 const messageWindow = $('#messageWindow')
 const memberNames = JSON.parse(localStorage.getItem('memberNames') ? localStorage.getItem('memberNames'): '{}') 
-const ws = new WebSocket(`ws://localhost:8000/ws/user/${user_id}/`);
+const ws = new WebSocket(`/ws/user/${user_id}/`);
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 
 var aiTexts = []
