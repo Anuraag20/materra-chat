@@ -1,0 +1,22 @@
+{% extends 'chat/base.html' %}
+{% block content %}
+<div class="card p-4" style="width: 25rem;">
+    <h2 class="text-center">Login</h2>
+    <form method="post">
+	{% csrf_token %}
+	<div class="mb-3">
+	    <label class="form-label">Username</label>
+	    <input name="username" type="text" class="form-control" required>
+	</div>
+	<div class="mb-3">
+	    <label class="form-label">Password</label>
+	    <input name="password" type="password" class="form-control" required>
+	</div>
+	<button type="submit" class="btn btn-primary w-100">Login</button>
+	<div class="text-center mt-2">
+		<a href="/signup{%if next%}?next={{next}}{%endif%}">Don't have an account? Sign up</a>
+	</div>
+    </form>
+</div>
+{% endblock content %}
+

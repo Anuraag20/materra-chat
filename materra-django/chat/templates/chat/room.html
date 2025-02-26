@@ -1,0 +1,50 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container vh-100 d-flex">
+	{% csrf_token %}
+	<input id='username' type='hidden' value='{{request.user.username}}'/>
+	<input id='user-id' type='hidden' value='{{request.user.id}}'/>
+
+	<aside class="bg-light p-3" style="width: 25%; border-right: 1px solid #dee2e6;">
+		<div>			
+			{% if not request.user.is_staff %}
+			<div>
+				<input name='usernames' type="text" placeholder="Usernames (comma separated)" />
+				<input name='room-name' type="text" placeholder="Enter the name of the room" />
+				<button class='btn btn-primary' id='start-chat'>Create Chat</button>
+			</div>
+			<div>
+				<button id="create-enquiry" class='btn btn-primary'>Create Enquiry</button>
+			</div>
+			{% endif %}
+		</div>
+		<br />
+		{% if not request.user.is_staff %}
+		<div class="list-group"><div class='list-group-item' onclick="renderRoom('AIASSISTANT')">AI Assistant</div></div>{% endif %}
+
+	    	<h5>Other Chats</h5>
+	    	<div id="chats" class="list-group"></div>
+	</aside>
+
+	<div class="flex-grow-1 d-flex flex-column">
+	    <div class="bg-primary text-white p-3 text-center">Chat Room</div>
+	    <div id="messageWindow" class="flex-grow-1 overflow-auto p-3" id="chat-box" style="height: 70vh; background-color: #f8f9fa;">
+		
+	    </div>
+	    <div class="input-group p-3">
+		<input id="message-content" type="text" class="form-control" placeholder="Type a message..." />
+		<input id="chat-file" type="file" class="form-control" />
+		<button disabled id="send" class="btn btn-primary">Send</button>
+	    </div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script_tags %}
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="{% static 'chat/js/chat.js' %}"></script>
+{% endblock %}
+

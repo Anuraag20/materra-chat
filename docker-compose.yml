@@ -1,0 +1,29 @@
+services:
+    django:
+      container_name: django
+      env_file: ./compose/django/.env
+      build:
+        dockerfile: ./compose/django/Dockerfile
+      ports:
+        - "8000:80"
+      depends_on:
+        - redis
+
+    fastapi:
+      container_name: fastapi
+      env_file: ./compose/fastapi/.env
+      build:
+        dockerfile: ./compose/fastapi/Dockerfile
+      ports:
+        - "8001:8000"
+
+    redis:
+      image: redis:6.0.16-alpine
+      restart: always
+      container_name : redis
+      ports:
+        - "6379:6379"
+        
+
+
+
